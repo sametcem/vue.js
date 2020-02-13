@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js | Intro</title>
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <style>
+         ul {
+            margin-top : 10px;
+            margin : 0px;
+            padding: 0px;
+            list-style-type: none;   
+            width : 300px;
+            
+         }
+
+         .item {
+             padding: 5px 5px;
+             margin-bottom: 5px;
+             border-bottom: 1px solid #ccc;
+             text-align: left;
+         }
+
+         .red {
+             background-color: coral;
+         }
+
+         .green {
+             background-color: limegreen;
+         }
+
+    </style>
+
+</head>
+<body>
+    
+    <div id="app">
+        <ul>
+            <li v-for="item in list"> {{item}}</li>
+            <hr>
+            <li v-for="i in 10" v-text="i"></li>
+            
+        </ul>
+        <hr>
+        <div v-for="(value, key) in personel">
+            <strong>{{key}}: </strong><span>{{value}}</span>
+        </div>
+        <hr>
+        Adet: <input type="text" v-model="sellCount">
+        <hr>
+        <ul>
+            <li v-for="product in productList" :class="backgroundByCount(product)" > <!-- v-if="product.count > 0" eklenebilir -->  
+            <span> {{ product.title }} - {{ product.count}} </span>
+            <button :disabled="product.count == 0" @click="sellProduct(product)"> Buy</button>
+
+            </li> 
+        </ul>
+        <p v-if="sellWarning" style="color: red; font-weight:bold;">Girdiginiz Miktar stok adetlerinden fazladir</p>
+    </div>
+    
+    <script>
+        new Vue({
+        el : "#app",
+        data: {
+                sellCount: 0,
+                sellWarning : false,
+                list : ["Elma","Armut", "Kiraz"],
+                personel : {
+                    name : "Gokhan",
+                    lastname : "Kandemir",
+                    email : "gokhan@gmail.com",
+                    phone : 12321421
+
+                },
+                productList: [
+                {
+                    title : "MacBook Pro",
+                    price : "100",
+                    count : "0",
+                },
+                {
+                    title : "iPhone",
+                    price : "50",
+                    count : "100",
+                },
+                {
+                    title : "klavye",
+                    price : "10",
+                    count : "1000",
+                   
+                },   
+                ] 
+            },
+        methods:  {
+            sellProduct(product){
+                if(this.sellCount > product.count) {
+                    this.sellWarning = true
+                } else {
+                     product.count = product.count - this.sellCount
+                     this.sellWarning = false
+                }
+               
+            },
+            backgroundByCount(product){
+                    return {'green' : product.count > 0, 'red' : product.count <=0}
+                }
+        },
+        computed: {     
+        }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js | Intro</title>
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    
+     <!--methods rendering isleminde tekrar calisir ,computed kendi icerisinde bagimli olan degiskenler degisirce calisir -->
+
+
+
+    <div id="app">
+        <input type="text" v-model="age">
+        <p> JavaScript: {{ age >= 18 ? "Resittir" : "Degildir..."}} </p>
+        <p> Method: {{ ageWriter()}} </p>
+        <p> Computed: {{ ageWriterComp }} </p>
+        <hr>
+        <p> {{ number }} </p>
+        <button @click="number++">Sayi Arttir...</button>
+        
+    </div>
+    
+    <script>
+        new Vue({
+          el : "#app",
+          data: {
+              age : 0,
+              number : 0
+          },
+          methods : {
+              ageWriter() {
+                  console.log("Method calisti")
+                  return this.age >= 18 ? "Resittir" : "Degildir..."
+              }
+          },
+          computed : {
+              ageWriterComp(){
+                  console.log("Computed calisti")
+                  return this.age >= 18 ? "Resittir" : "Degildir..."
+              }
+          }
+         
+        });
+    </script>
+</body>
+</html>

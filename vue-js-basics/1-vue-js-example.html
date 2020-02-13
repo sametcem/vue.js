@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js | Intro</title>
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  
+
+    <div id="app">
+        <h3> {{ title }}</h3> <!-- String Interpolation -->
+        <button> {{ buttonTitle }}</button>
+        <p> {{ paragraph }} </p>
+        <p v-text="paragraph"></p>
+        <a v-bind:href="link" v-bind:data-id="dataId"> Google </a>
+        <p v-html="details"></p>
+        
+    </div>
+    
+    <script>
+        new Vue({
+            el : "#app",
+            data : {
+                title: "Test Baslik",
+                buttonTitle: "Tikla gelsin..",
+                paragraph: "lorem ipsum dolor sit amet",
+                link : "https://google.com.tr",
+                dataId : "1",
+                details: "<b> Thise is a new detail... <b>"
+            }
+        });
+
+    </script>
+</body>
+</html>
